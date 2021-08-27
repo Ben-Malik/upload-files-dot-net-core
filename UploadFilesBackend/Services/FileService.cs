@@ -6,6 +6,12 @@ using Microsoft.AspNetCore.Http;
 using UploadFilesBackend.Models;  
 namespace UploadFilesBackend.Services
 {
+    // <summary>
+    //  A manager class to handle the role of bridge between the db and the controller.
+    // </summary>
+    //
+    // TODO Should be made as an interface and follow repository pattern.
+    //
     public class FileManager
     {
         private readonly FileContext _fileContext;
