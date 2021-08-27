@@ -36,35 +36,12 @@ namespace UploadFilesBackend.Controllers
         [HttpPost]
         [Route("upload")]
         [EnableCors("CorsPolicy")]
-        public async Task<IActionResult> UploadToFileSystemAsync(IFormFile file)
+        public Task<IActionResult> UploadToFileSystemAsync(IFormFile file)
         {
 
-            var basePath = Path.Combine(Directory.GetCurrentDirectory() + "\\Files\\");
-            bool basePathExists = System.IO.Directory.Exists(basePath);
-            if (!basePathExists) Directory.CreateDirectory(basePath);
-            var fileName = Path.GetFileName(file.FileName);
-            var filePath = Path.Combine(basePath, file.FileName);
-            var fileSize = file.Length;
-            var extension = Path.GetExtension(file.FileName);
-            if (!System.IO.File.Exists(filePath))
-            {
-
-                var fileModel = new FileModel
-                {
-                    CreatedAt = DateTime.UtcNow,
-                    FileType = file.ContentType,
-                    FileName = fileName,
-                    FileSize = fileSize
-                };
-
-                using (var target = new MemoryStream())
-                {
-                    await file.CopyToAsync(target);
-                    fileModel.FileContent = target.ToArray();
-                }
-                Save(fileModel);
-            }
-            return View();
+            fileManager.UploadFileToDB(file);
+            
+            return ViewBag;
         }
 
         [HttpPost]

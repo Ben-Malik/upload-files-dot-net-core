@@ -10,9 +10,12 @@ using Assert = Xunit.Assert;
 
 namespace UploadFilesBackend.Tests
 {
+    // <summary>
+    // A class unit testing the FileController class.
+    // </summary>
     public class FileControllerTest
     {
-        [SetUp]
+        [Fact]
         public void setUp()
         {
         }
@@ -20,24 +23,26 @@ namespace UploadFilesBackend.Tests
         [Fact]
         public void testSaveFileModel_ReturnsBadRequestObjectWhenTheContentOfTheFileIsNull()
         {
+            // Data statment
             var model = new FileModel { CreatedAt = DateTime.UtcNow,
                                         FileName = "Ben.txt",
                                         FileSize = 123, FileType = "txt",
                                         FileContent = null
                                       };
 
-            //mockContext.Setup(repo => repo.isFileModelValid(model)).Returns(false);
             var fileController = new FileController(new FileContext());
 
-
+            // Call statment.
             var result = fileController.Save(model);
 
+            // Assertion statement
             Assert.IsType<BadRequestObjectResult>(result.Result);
         }
 
         [Fact]
         public void testSaveFileModel_ReturnsFileModelWhenTheGivenFileIsValid()
         {
+            // Data Satement
             byte[] fileContent = {};
             var model = new FileModel
             {
@@ -48,14 +53,14 @@ namespace UploadFilesBackend.Tests
                 FileContent = fileContent
             };
 
-            //mockContext.Setup(repo => repo.isFileModelValid(model)).Returns(false);
             var fileController = new FileController(new FileContext());
 
-
+            // Call Statment
             var result = fileController.Save(model);
 
-            Console.WriteLine(result);
+            // Assertion Statement
             Assert.IsType<BadRequestObjectResult>(result.Result);
+            Assert.NotNull(result);
         }
     }
 }
