@@ -45,7 +45,6 @@ namespace UploadFilesBackend.Services
             var fileName = Path.GetFileName(file.FileName);
             var filePath = Path.Combine(basePath, file.FileName);
             var fileSize = file.Length;
-            var extension = Path.GetExtension(file.FileName);
             if (!System.IO.File.Exists(filePath))
             {
 
