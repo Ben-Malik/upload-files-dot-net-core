@@ -10,4 +10,4 @@ The very aim of this project is to create a .net core app that would save and re
 5. Docker used to containise the Server.
 6. DBvear used as DB GUI.
 
-# [Frontend Part of the Project](https://github.com/Ben-Malik/file-uploader-angular)
+# [Frontend Part of the Project - Angular 11](https://github.com/Ben-Malik/file-uploader-angular)
